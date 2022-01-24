@@ -3,10 +3,11 @@ Dataset setup and loaders
 This file including the different datasets processing pipelines
 """
 from datasets import cityscapes
-from datasets import mapillary
-from datasets import kitti
-from datasets import camvid
-from datasets import bdd
+from datasets import railsem19
+# from datasets import mapillary
+# from datasets import kitti
+# from datasets import camvid
+# from datasets import bdd
 
 import torchvision.transforms as standard_transforms
 
@@ -50,6 +51,13 @@ def setup_loaders(args):
             args.val_batch_size = args.bs_mult * args.ngpu
     elif args.dataset == 'bdd':
         args.dataset_cls = bdd
+        args.train_batch_size = args.bs_mult * args.ngpu
+        if args.bs_mult_val > 0:
+            args.val_batch_size = args.bs_mult_val * args.ngpu
+        else:
+            args.val_batch_size = args.bs_mult * args.ngpu
+    elif args.dataset == 'railsem19':
+        args.dataset_cls = railsem19
         args.train_batch_size = args.bs_mult * args.ngpu
         if args.bs_mult_val > 0:
             args.val_batch_size = args.bs_mult_val * args.ngpu
@@ -156,12 +164,99 @@ def setup_loaders(args):
                                               transform=val_input_transform,
                                               target_transform=target_transform,
                                               cv_split=args.cv)
-    elif args.dataset == 'mapillary':
-        eval_size = 1536
-        val_joint_transform_list = [
-            joint_transforms.ResizeHeight(eval_size),
-            joint_transforms.CenterCropPad(eval_size)]
-        train_set = args.dataset_cls.Mapillary(
+    # elif args.dataset == 'mapillary':
+    #     eval_size = 1536
+    #     val_joint_transform_list = [
+    #         joint_transforms.ResizeHeight(eval_size),
+    #         joint_transforms.CenterCropPad(eval_size)]
+    #     train_set = args.dataset_cls.Mapillary(
+    #         'semantic', 'train',
+    #         joint_transform_list=train_joint_transform_list,
+    #         transform=train_input_transform,
+    #         target_transform=target_train_transform,
+    #         dump_images=args.dump_augmentation_images,
+    #         class_uniform_pct=args.class_uniform_pct,
+    #         class_uniform_tile=args.class_uniform_tile,
+    #         test=args.test_mode)
+    #     val_set = args.dataset_cls.Mapillary(
+    #         'semantic', 'val',
+    #         joint_transform_list=val_joint_transform_list,
+    #         transform=val_input_transform,
+    #         target_transform=target_transform,
+    #         test=False)
+
+    # elif args.dataset == 'kitti':
+    #     train_set = args.dataset_cls.KITTI(
+    #         'semantic', 'train', args.maxSkip,
+    #         joint_transform_list=train_joint_transform_list,
+    #         transform=train_input_transform,
+    #         target_transform=target_train_transform,
+    #         dump_images=args.dump_augmentation_images,
+    #         class_uniform_pct=args.class_uniform_pct,
+    #         class_uniform_tile=args.class_uniform_tile,
+    #         test=args.test_mode,
+    #         cv_split=args.cv,
+    #         scf=args.scf,
+    #         hardnm=args.hardnm)
+    #     val_set = args.dataset_cls.KITTI(
+    #         'semantic', 'trainval', 0, 
+    #         joint_transform_list=None,
+    #         transform=val_input_transform,
+    #         target_transform=target_transform,
+    #         test=False,
+    #         cv_split=args.cv,
+    #         scf=None)
+    # elif args.dataset == 'camvid':
+
+    #     train_set = args.dataset_cls.CAMVID(
+    #         'semantic', 'trainval', args.maxSkip,
+    #         joint_transform_list=train_joint_transform_list,
+    #         transform=train_input_transform,
+    #         target_transform=target_train_transform,
+    #         dump_images=args.dump_augmentation_images,
+    #         class_uniform_pct=args.class_uniform_pct,
+    #         class_uniform_tile=args.class_uniform_tile,
+    #         test=args.test_mode,
+    #         cv_split=args.cv,
+    #         scf=args.scf,
+    #         hardnm=args.hardnm,
+    #         edge_map=edge_map
+    #     )
+    #     val_set = args.dataset_cls.CAMVID(
+    #         'semantic', 'test', 0, 
+    #         joint_transform_list=None,
+    #         transform=val_input_transform,
+    #         target_transform=target_transform,
+    #         test=False,
+    #         cv_split=args.cv,
+    #         scf=None)
+
+    # elif args.dataset == 'bdd':
+    #     train_set = args.dataset_cls.BDD(
+    #         'semantic', 'train', args.maxSkip,
+    #         joint_transform_list=train_joint_transform_list,
+    #         transform=train_input_transform,
+    #         target_transform=target_train_transform,
+    #         dump_images=args.dump_augmentation_images,
+    #         class_uniform_pct=args.class_uniform_pct,
+    #         class_uniform_tile=args.class_uniform_tile,
+    #         test=args.test_mode,
+    #         cv_split=args.cv,
+    #         scf=args.scf,
+    #         hardnm=args.hardnm,
+    #         edge_map=edge_map
+    #     )
+    #     val_set = args.dataset_cls.BDD(
+    #         'semantic', 'val', 0,
+    #         joint_transform_list=None,
+    #         transform=val_input_transform,
+    #         target_transform=target_transform,
+    #         test=False,
+    #         cv_split=args.cv,
+    #         scf=None)
+
+    elif args.dataset == 'railsem19':
+        train_set = args.dataset_cls.RailSem19(
             'semantic', 'train',
             joint_transform_list=train_joint_transform_list,
             transform=train_input_transform,
@@ -169,83 +264,14 @@ def setup_loaders(args):
             dump_images=args.dump_augmentation_images,
             class_uniform_pct=args.class_uniform_pct,
             class_uniform_tile=args.class_uniform_tile,
-            test=args.test_mode)
-        val_set = args.dataset_cls.Mapillary(
+            test=args.test_mode
+        )
+        val_set = args.dataset_cls.RailSem19(
             'semantic', 'val',
-            joint_transform_list=val_joint_transform_list,
+            joint_transform_list=None,
             transform=val_input_transform,
             target_transform=target_transform,
             test=False)
-
-    elif args.dataset == 'kitti':
-        train_set = args.dataset_cls.KITTI(
-            'semantic', 'train', args.maxSkip,
-            joint_transform_list=train_joint_transform_list,
-            transform=train_input_transform,
-            target_transform=target_train_transform,
-            dump_images=args.dump_augmentation_images,
-            class_uniform_pct=args.class_uniform_pct,
-            class_uniform_tile=args.class_uniform_tile,
-            test=args.test_mode,
-            cv_split=args.cv,
-            scf=args.scf,
-            hardnm=args.hardnm)
-        val_set = args.dataset_cls.KITTI(
-            'semantic', 'trainval', 0, 
-            joint_transform_list=None,
-            transform=val_input_transform,
-            target_transform=target_transform,
-            test=False,
-            cv_split=args.cv,
-            scf=None)
-    elif args.dataset == 'camvid':
-
-        train_set = args.dataset_cls.CAMVID(
-            'semantic', 'trainval', args.maxSkip,
-            joint_transform_list=train_joint_transform_list,
-            transform=train_input_transform,
-            target_transform=target_train_transform,
-            dump_images=args.dump_augmentation_images,
-            class_uniform_pct=args.class_uniform_pct,
-            class_uniform_tile=args.class_uniform_tile,
-            test=args.test_mode,
-            cv_split=args.cv,
-            scf=args.scf,
-            hardnm=args.hardnm,
-            edge_map=edge_map
-        )
-        val_set = args.dataset_cls.CAMVID(
-            'semantic', 'test', 0, 
-            joint_transform_list=None,
-            transform=val_input_transform,
-            target_transform=target_transform,
-            test=False,
-            cv_split=args.cv,
-            scf=None)
-
-    elif args.dataset == 'bdd':
-        train_set = args.dataset_cls.BDD(
-            'semantic', 'train', args.maxSkip,
-            joint_transform_list=train_joint_transform_list,
-            transform=train_input_transform,
-            target_transform=target_train_transform,
-            dump_images=args.dump_augmentation_images,
-            class_uniform_pct=args.class_uniform_pct,
-            class_uniform_tile=args.class_uniform_tile,
-            test=args.test_mode,
-            cv_split=args.cv,
-            scf=args.scf,
-            hardnm=args.hardnm,
-            edge_map=edge_map
-        )
-        val_set = args.dataset_cls.BDD(
-            'semantic', 'val', 0,
-            joint_transform_list=None,
-            transform=val_input_transform,
-            target_transform=target_transform,
-            test=False,
-            cv_split=args.cv,
-            scf=None)
 
     elif args.dataset == 'null_loader':
         train_set = args.dataset_cls.null_loader(args.crop_size)

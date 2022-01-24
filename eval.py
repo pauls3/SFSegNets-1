@@ -26,7 +26,7 @@ import numpy as np
 import transforms.transforms as extended_transforms
 
 from config import assert_and_infer_cfg
-from datasets import cityscapes, kitti
+from datasets import cityscapes, railsem19
 from optimizer import restore_snapshot
 import transforms.joint_transforms as joint_transforms
 
@@ -390,12 +390,20 @@ def setup_loader():
                                                eval_scales=eval_scales,
                                                eval_flip=not args.no_flip,
                                                  )
-    elif args.dataset == 'kitti':
-        args.dataset_cls = kitti
-        test_set = args.dataset_cls.KITTI(args.mode, args.split,
+    # elif args.dataset == 'kitti':
+    #     args.dataset_cls = kitti
+    #     test_set = args.dataset_cls.KITTI(args.mode, args.split,
+    #                                      transform=val_input_transform,
+    #                                      target_transform=target_transform,
+    #                                      cv_split=args.cv_split)
+
+    elif args.dataset == 'railsem19':
+        args.dataset_cls = railsem19
+        test_set = args.dataset_cls.RailSem19(args.mode, args.split,
                                          transform=val_input_transform,
                                          target_transform=target_transform,
-                                         cv_split=args.cv_split)
+                                         test=True)
+
     else:
         raise NameError('-------------Not Supported Currently-------------')
 
