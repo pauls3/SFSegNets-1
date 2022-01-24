@@ -38,19 +38,22 @@ __C.DATASET = AttrDict()
 #Cityscapes Dir Location
 
 # Set you dataset path here
-__C.DATASET.CITYSCAPES_DIR = './data/cityscapes'
+__C.DATASET.CITYSCAPES_DIR = '/home/stanik/rtis_lab/data/Cityscapes'
 # SDC Augmented Cityscapes Dir Location, We do not use it.
 __C.DATASET.CITYSCAPES_AUG_DIR = ''
 # Mapillary Dataset Dir Location
-__C.DATASET.MAPILLARY_DIR = './data/mapillary'
+# __C.DATASET.MAPILLARY_DIR = './data/mapillary'
 # Kitti Dataset Dir Location
-__C.DATASET.KITTI_DIR = './data/kitti'
+# __C.DATASET.KITTI_DIR = './data/kitti'
 # SDC Augmented Kitti Dataset Dir Location, We do not use it.
 __C.DATASET.KITTI_AUG_DIR = ''
 # Camvid Dataset Dir Location
-__C.DATASET.CAMVID_DIR = './data/camVid'
+# __C.DATASET.CAMVID_DIR = './data/camVid'
 # BDD Dataset Dir Location
-__C.DATASET.BDD_DIR = './data/BDD/seg'
+# __C.DATASET.BDD_DIR = './data/BDD/seg'
+# RailSem19 Dataset
+__C.DATASET.RAILSEM19 = '/home/stanik/rtis_lab/data/RailSem19/rs19_4000'
+
 
 #Number of splits to support
 __C.DATASET.CV_SPLITS = 3
