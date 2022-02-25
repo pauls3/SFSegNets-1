@@ -52,7 +52,8 @@ __C.DATASET.KITTI_AUG_DIR = ''
 # BDD Dataset Dir Location
 # __C.DATASET.BDD_DIR = './data/BDD/seg'
 # RailSem19 Dataset
-__C.DATASET.RAILSEM19 = '/home/stanik/rtis_lab/data/RailSem19/rs19_4000'
+# __C.DATASET.RAILSEM19 = '/home/stanik/rtis_lab/data/RailSem19/rs19_4000'
+__C.DATASET.RAILSEM19 = '/home/stanik/rtis_lab/data/RailSem19/custom_split'
 
 
 #Number of splits to support
