@@ -12,7 +12,7 @@ from config import cfg
 num_classes = 19
 ignore_label = 255
 root = cfg.DATASET.RAILSEM19
-config_fn = '/home/stanik/rtis_lab/data/RailSem19/rs19-config.json'
+config_fn = '/home/nvidia/repos/SFSegNets-1/rs19-config.json'
 id_to_ignore_or_group = {}
 color_mapping = []
 id_to_trainid = {}
