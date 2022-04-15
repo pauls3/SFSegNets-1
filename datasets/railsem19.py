@@ -68,12 +68,12 @@ def make_dataset(quality, mode, test):
     img_dir_name = None
     if quality == 'semantic' and test == False:
         if mode == 'train':
-            img_dir_name = 'train_images'
-            mask_dir_name = 'train_masks'
+            img_dir_name = 'trainVal_images'
+            mask_dir_name = 'trainVal_masks'
             mask_path = os.path.join(root, mask_dir_name)
         if mode == 'val':
-            img_dir_name = 'validation_images'
-            mask_dir_name = 'validation_masks'
+            img_dir_name = 'test_images'
+            mask_dir_name = 'test_masks'
             mask_path = os.path.join(root, mask_dir_name)
         if mode == 'nevada_test':
             mask_path = os.path.join(root, mask_dir_name)
