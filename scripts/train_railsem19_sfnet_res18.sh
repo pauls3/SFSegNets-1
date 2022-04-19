@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 now=$(date +"%Y%m%d_%H%M%S")
-EXP_DIR=./logs/rs19_trainVal_pretrained_cityscapes_0
+EXP_DIR=./logs/rs19_trainVal_pretrained_cityscapes_1
 mkdir -p ${EXP_DIR}
 # Example on Cityscapes by resnet50-deeplabv3+ as baseline
 python3 -m torch.distributed.launch --nproc_per_node=4 train.py \
@@ -23,7 +23,7 @@ python3 -m torch.distributed.launch --nproc_per_node=4 train.py \
   --color_aug 0.25 \
   --gblur \
   --bblur \
-  --max_epoch 1000 \
+  --max_epoch 1500 \
   --wt_bound 1.0 \
   --bs_mult 8 \
   --apex \
