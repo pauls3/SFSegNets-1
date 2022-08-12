@@ -58,7 +58,7 @@ def colorize_mask(image_array):
     # print(len(color_mapping))
     # assert len(color_mapping) == 256 * 3, 'color mapping problem'
     new_mask = Image.fromarray(image_array.astype(np.uint8)).convert('P')
-    new_mask.putpalette(color_mapping)
+    # new_mask.putpalette(color_mapping)
     return new_mask
 
 
