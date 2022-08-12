@@ -58,7 +58,7 @@ def colorize_mask(image_array):
     # print(len(color_mapping))
     # assert len(color_mapping) == 256 * 3, 'color mapping problem'
     new_mask = Image.fromarray(image_array.astype(np.uint8)).convert('P')
-    # new_mask.putpalette(color_mapping)
+    new_mask.putpalette(color_mapping)
     return new_mask
 
 
@@ -201,7 +201,8 @@ class RailSem19(data.Dataset):
                 dump_img_name = img_name
             out_img_fn = os.path.join(outdir, dump_img_name + '.png')
             out_msk_fn = os.path.join(outdir, dump_img_name + '_mask.png')
-            mask_img = colorize_mask(np.array(mask))
+            # mask_img = colorize_mask(np.array(mask))
+            mask_img = mask
             img.save(out_img_fn)
             mask_img.save(out_msk_fn)
 
