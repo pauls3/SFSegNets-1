@@ -201,10 +201,11 @@ class RailSem19(data.Dataset):
                 dump_img_name = img_name
             out_img_fn = os.path.join(outdir, dump_img_name + '.png')
             out_msk_fn = os.path.join(outdir, dump_img_name + '_mask.png')
-            # mask_img = colorize_mask(np.array(mask))
+            mask_img = colorize_mask(np.array(mask))
             mask_img = mask
             img.save(out_img_fn)
             mask_img.save(out_msk_fn)
+            print(mask)
 
         if self.transform is not None:
             img = self.transform(img)
