@@ -182,8 +182,6 @@ class RailSem19(data.Dataset):
             mask_copy[mask == k] = v
         mask = Image.fromarray(mask_copy.astype(np.uint8))
 
-        print(mask)
-
         # Image Transformations
         if self.joint_transform_list is not None:
             for idx, xform in enumerate(self.joint_transform_list):
