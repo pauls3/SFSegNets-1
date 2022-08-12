@@ -42,10 +42,10 @@ def gen_colormap():
     return id2name
 
 gen_colormap()
-assert len(color_mapping) != 0, 'can not load config.json, check your map dataset config file'
-zero_pad = 256 * 3 - len(color_mapping)
-for i in range(zero_pad):
-    color_mapping.append(0)
+# assert len(color_mapping) != 0, 'can not load config.json, check your map dataset config file'
+# zero_pad = 256 * 3 - len(color_mapping)
+# for i in range(zero_pad):
+#     color_mapping.append(0)
 
 
 def colorize_mask(image_array):
