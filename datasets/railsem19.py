@@ -39,6 +39,8 @@ def gen_colormap():
         name = name.replace(' ', '_')
         id2name[i] = name
     color_mapping = colormap
+
+    print(color_mapping)
     return id2name
 
 gen_colormap()
