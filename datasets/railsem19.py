@@ -87,7 +87,6 @@ def make_dataset(quality, mode, test):
         raise BaseException("Instance Segmentation Not support")
 
     img_path = os.path.join(root, img_dir_name)
-    print(img_path)
     if quality != 'video':
         imgs = sorted([os.path.splitext(f)[0] for f in os.listdir(img_path)])
         msks = sorted([os.path.splitext(f)[0] for f in os.listdir(mask_path)])
@@ -183,6 +182,8 @@ class RailSem19(data.Dataset):
             mask_copy[mask == k] = v
         mask = Image.fromarray(mask_copy.astype(np.uint8))
 
+        print(mask)
+
         # Image Transformations
         if self.joint_transform_list is not None:
             for idx, xform in enumerate(self.joint_transform_list):
@@ -205,7 +206,6 @@ class RailSem19(data.Dataset):
             mask_img = mask
             img.save(out_img_fn)
             mask_img.save(out_msk_fn)
-            print(mask)
 
         if self.transform is not None:
             img = self.transform(img)
