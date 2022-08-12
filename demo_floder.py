@@ -79,7 +79,7 @@ for img_id, img_name in enumerate(images):
     # save colorized predictions
     colorized = args.dataset_cls.colorize_mask(pred)
     # if colorized.mode == "P":
-    colorized = colorized.convert("RGB")
+    # colorized = colorized.convert("RGB")
 
     colorized.save(os.path.join(args.save_dir, color_name))
 
