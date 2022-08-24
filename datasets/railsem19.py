@@ -74,8 +74,8 @@ def make_dataset(quality, mode, test):
             mask_dir_name = 'trainVal_masks'
             mask_path = os.path.join(root, mask_dir_name)
         if mode == 'val':
-            img_dir_name = 'test_images'
-            mask_dir_name = 'test_masks'
+            img_dir_name = 'val_images'
+            mask_dir_name = 'val_masks'
             mask_path = os.path.join(root, mask_dir_name)
         if mode == 'nevada_test':
             mask_path = os.path.join(root, mask_dir_name)
