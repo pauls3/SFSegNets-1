@@ -24,6 +24,8 @@ def gen_colormap():
     """
     global color_mapping
 
+    print('**************************************************************')
+
     # load railsem19 config
     with open(config_fn) as config_file:
         config = json.load(config_file)
