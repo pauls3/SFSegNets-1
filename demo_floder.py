@@ -15,6 +15,7 @@ import torchvision.transforms as transforms
 from network import get_net
 from optimizer import restore_snapshot
 from datasets import cityscapes
+from datasets import railsem19
 from config import assert_and_infer_cfg
 from utils.misc import save_log
 
@@ -35,7 +36,7 @@ os.makedirs(log_dir, exist_ok=True)
 save_log('log', log_dir, date_str, rank=0)
 
 # get net
-args.dataset_cls = cityscapes
+args.dataset_cls = railsem19
 net = get_net(args, criterion=None)
 net = torch.nn.DataParallel(net).cuda()
 logging.info('Net built.')
