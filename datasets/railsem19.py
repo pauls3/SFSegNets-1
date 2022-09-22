@@ -84,7 +84,8 @@ def make_dataset(quality, mode, test):
     elif test == True:
         img_dir_name = 'test_images'
         mask_dir_name = 'test_masks'
-        mask_path = '/home/stanik/datasets/nevada_test_images/'
+        mask_path = os.path.join(root, mask_dir_name)
+        # mask_path = '/home/stanik/datasets/nevada_test_images/'
     else:
         raise BaseException("Instance Segmentation Not support")
 
