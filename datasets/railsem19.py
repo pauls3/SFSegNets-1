@@ -67,6 +67,7 @@ def make_dataset(quality, mode, test):
     """
     Create File List
     """
+    
     # assert (quality == 'semantic' and mode in ['train', 'val'])
     img_dir_name = None
     if quality == 'semantic' and test == False:
@@ -86,6 +87,8 @@ def make_dataset(quality, mode, test):
         mask_path = '/home/stanik/datasets/nevada_test_images/'
     else:
         raise BaseException("Instance Segmentation Not support")
+
+    print(img_path, mask_path)
 
     img_path = os.path.join(root, img_dir_name)
     if quality != 'video':
