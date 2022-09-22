@@ -88,7 +88,7 @@ def make_dataset(quality, mode, test):
     else:
         raise BaseException("Instance Segmentation Not support")
 
-    print(img_path, mask_path)
+    print(mode, test)
 
     img_path = os.path.join(root, img_dir_name)
     if quality != 'video':
