@@ -1,3 +1,5 @@
+# CUDA_VISIBLE_DEVICES="4,5,6,7" sh ./scripts/train_cityscapes_sfnet_res18.sh
+
 #!/usr/bin/env bash
 now=$(date +"%Y%m%d_%H%M%S")
 EXP_DIR=./logs/rs19_trainVal_pretrained_cityscapes_3
@@ -27,7 +29,7 @@ python3 -m torch.distributed.launch --nproc_per_node=4 train.py \
   --wt_bound 1.0 \
   --bs_mult 8 \
   --apex \
-  --exp railsem19_SFsegnet_res18_lr_0.00015 \
+  --exp railsem19_SFnet_res18_lr_0.001 \
   --ckpt ${EXP_DIR}/ \
   --tb_path ${EXP_DIR}/ \
   --snapshot pretrained_models/pretrained_cityscapes_mapillary_rs18_miou-0.799.pth \

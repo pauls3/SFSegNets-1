@@ -2,7 +2,7 @@
 Dataset setup and loaders
 This file including the different datasets processing pipelines
 """
-from datasets import cityscapes
+# from datasets import cityscapes
 from datasets import railsem19
 # from datasets import mapillary
 # from datasets import kitti
