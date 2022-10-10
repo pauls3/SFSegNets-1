@@ -2,7 +2,7 @@
 Dataset setup and loaders
 This file including the different datasets processing pipelines
 """
-# from datasets import cityscapes
+from datasets import cityscapes
 from datasets import railsem19
 # from datasets import mapillary
 # from datasets import kitti
@@ -23,41 +23,40 @@ def setup_loaders(args):
     return:  training data loader, validation data loader loader,  train_set
     """
 
-    # if args.dataset == 'cityscapes':
-    #     args.dataset_cls = cityscapes
-    #     args.train_batch_size = args.bs_mult * args.ngpu
-    #     if args.bs_mult_val > 0:
-    #         args.val_batch_size = args.bs_mult_val * args.ngpu
-    #     else:
-    #         args.val_batch_size = args.bs_mult * args.ngpu
-    #         # args.val_batch_size = 10
-    # elif args.dataset == 'mapillary':
-    #     args.dataset_cls = mapillary
-    #     args.train_batch_size = args.bs_mult * args.ngpu
-    #     args.val_batch_size = 4
-    # elif args.dataset == 'kitti':
-    #     args.dataset_cls = kitti
-    #     args.train_batch_size = args.bs_mult * args.ngpu
-    #     if args.bs_mult_val > 0:
-    #         args.val_batch_size = args.bs_mult_val * args.ngpu
-    #     else:
-    #         args.val_batch_size = args.bs_mult * args.ngpu
-    # elif args.dataset == 'camvid':
-    #     args.dataset_cls = camvid
-    #     args.train_batch_size = args.bs_mult * args.ngpu
-    #     if args.bs_mult_val > 0:
-    #         args.val_batch_size = args.bs_mult_val * args.ngpu
-    #     else:
-    #         args.val_batch_size = args.bs_mult * args.ngpu
-    # elif args.dataset == 'bdd':
-    #     args.dataset_cls = bdd
-    #     args.train_batch_size = args.bs_mult * args.ngpu
-    #     if args.bs_mult_val > 0:
-    #         args.val_batch_size = args.bs_mult_val * args.ngpu
-    #     else:
-    #         args.val_batch_size = args.bs_mult * args.ngpu
-    # el
-    if args.dataset == 'railsem19':
+    if args.dataset == 'cityscapes':
+        args.dataset_cls = cityscapes
+        args.train_batch_size = args.bs_mult * args.ngpu
+        if args.bs_mult_val > 0:
+            args.val_batch_size = args.bs_mult_val * args.ngpu
+        else:
+            args.val_batch_size = args.bs_mult * args.ngpu
+            # args.val_batch_size = 10
+    elif args.dataset == 'mapillary':
+        args.dataset_cls = mapillary
+        args.train_batch_size = args.bs_mult * args.ngpu
+        args.val_batch_size = 4
+    elif args.dataset == 'kitti':
+        args.dataset_cls = kitti
+        args.train_batch_size = args.bs_mult * args.ngpu
+        if args.bs_mult_val > 0:
+            args.val_batch_size = args.bs_mult_val * args.ngpu
+        else:
+            args.val_batch_size = args.bs_mult * args.ngpu
+    elif args.dataset == 'camvid':
+        args.dataset_cls = camvid
+        args.train_batch_size = args.bs_mult * args.ngpu
+        if args.bs_mult_val > 0:
+            args.val_batch_size = args.bs_mult_val * args.ngpu
+        else:
+            args.val_batch_size = args.bs_mult * args.ngpu
+    elif args.dataset == 'bdd':
+        args.dataset_cls = bdd
+        args.train_batch_size = args.bs_mult * args.ngpu
+        if args.bs_mult_val > 0:
+            args.val_batch_size = args.bs_mult_val * args.ngpu
+        else:
+            args.val_batch_size = args.bs_mult * args.ngpu
+    elif args.dataset == 'railsem19':
         args.dataset_cls = railsem19
         args.train_batch_size = args.bs_mult * args.ngpu
         if args.bs_mult_val > 0:

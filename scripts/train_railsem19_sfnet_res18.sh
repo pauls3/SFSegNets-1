@@ -1,4 +1,4 @@
-# CUDA_VISIBLE_DEVICES="4,5,6,7" sh ./scripts/train_cityscapes_sfnet_res18.sh
+# CUDA_VISIBLE_DEVICES="4,5,6,7" sh ./scripts/train_railsem19_sfnet_res18.sh
 
 #!/usr/bin/env bash
 now=$(date +"%Y%m%d_%H%M%S")
