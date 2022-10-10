@@ -11,7 +11,7 @@ python3 -m torch.distributed.launch --nproc_per_node=4 train.py \
   --arch network.sfnet_resnet.DeepR18_SF_deeply \
   --class_uniform_pct 0.5 \
   --class_uniform_tile 1080 \
-  --lr 0.001 \
+  --lr 0.002 \
   --lr_schedule poly \
   --poly_exp 1.0 \
   --repoly 1.5  \
