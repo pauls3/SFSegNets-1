@@ -11,7 +11,7 @@ python3 -m torch.distributed.launch --nproc_per_node=4 train.py \
   --arch network.sfnet_resnet.DeepR18_SF_deeply \
   --class_uniform_pct 0.5 \
   --class_uniform_tile 1080 \
-  --lr 0.002 \
+  --lr 0.0025 \
   --lr_schedule poly \
   --poly_exp 1.0 \
   --repoly 1.5  \
@@ -25,11 +25,11 @@ python3 -m torch.distributed.launch --nproc_per_node=4 train.py \
   --color_aug 0.25 \
   --gblur \
   --bblur \
-  --max_epoch 1500 \
+  --max_epoch 400 \
   --wt_bound 1.0 \
   --bs_mult 8 \
   --apex \
-  --exp railsem19_SFnet_res18_lr_0.001 \
+  --exp railsem19_SFnet_res18_lr_0.002 \
   --ckpt ${EXP_DIR}/ \
   --tb_path ${EXP_DIR}/ \
   --snapshot pretrained_models/pretrained_cityscapes_mapillary_rs18_miou-0.799.pth \
