@@ -9,5 +9,5 @@ python3 eval.py \
     --inference_mode whole \
     --scales 1 \
     --split test \
-    --ckpt_path logs/pretrained_cityscapes_1_test_0 \
-    --snapshot logs/rs19_trainVal_pretrained_cityscapes_2/railsem19_SFsegnet_res18_lr_0.00015/rail-network.sfnet_resnet.DeepR18_SF_deeply_apex_T_bblur_T_bs_mult_8_class_uniform_tile_1080_crop_size_1080_cv_0_dataset_railsem_lr_0.001_ohem_T_PT_sbn/best_epoch_1465_mean-iu_0.75616.pth
+    --ckpt_path logs/pretrained_cityscapes_1_test_1 \
+    --snapshot logs/rs19_trainVal_pretrained_cityscapes_3/railsem19_SFnet_res18_lr_0.002/rail-network.sfnet_resnet.DeepR18_SF_deeply_apex_T_bblur_T_bs_mult_8_class_uniform_tile_1080_crop_size_1080_cv_0_dataset_railsem_lr_0.0025_ohem_T_PT_sbn/best_epoch_391_mean-iu_0.75268.pth
