@@ -9,7 +9,7 @@ python3 -m torch.distributed.launch --nproc_per_node=2 train.py \
   --dataset rtisrail22 \
   --cv 0 \
   --arch network.sfnet_resnet.DeepR18_SF_deeply \
-  --class_uniform_pct 0.5 \
+  --class_uniform_pct 0.01 \
   --class_uniform_tile 1080 \
   --lr 0.001 \
   --lr_schedule poly \
