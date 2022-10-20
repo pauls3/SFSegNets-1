@@ -54,7 +54,7 @@ __C.DATASET.KITTI_AUG_DIR = ''
 # RailSem19 Dataset
 # __C.DATASET.RAILSEM19 = '/home/stanik/rtis_lab/data/RailSem19/rs19_4000'
 __C.DATASET.RAILSEM19 = '/home/stanik/rtis_lab/data/RailSem19/custom_split'
-__C.DATASET.RTISRAIL22 = '/home/stanik/rtis_lab/data/rtis-rail-2022/custom_split'
+__C.DATASET.RTISRAIL22 = '/home/stanik/rtis_lab/data/rtis-rail-2022v2/custom_split'
 
 
 #Number of splits to support
