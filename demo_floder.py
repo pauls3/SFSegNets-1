@@ -27,8 +27,10 @@ parser.add_argument('--arch', type=str, default='network.sfnet_resnet.DeepR18_SF
 parser.add_argument('--save_dir', type=str, default='./save', help='path to save your results')
 parser.add_argument('--local_rank', default=0, type=int,
                     help='parameter used by apex library')
-parser.add_argument('--local_rank', default=0, type=int,
-                    help='parameter used by apex library')
+parser.add_argument('--apex', action='store_true', default=False,
+                    help='Use Nvidia Apex Distributed Data Parallel')
+
+
 args = parser.parse_args()
 assert_and_infer_cfg(args, train_mode=False)
 cudnn.benchmark = False
