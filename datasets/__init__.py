@@ -4,7 +4,7 @@ This file including the different datasets processing pipelines
 """
 from datasets import cityscapes
 from datasets import railsem19
-from datasets import rtisrail22
+# from datasets import rtisrail22
 # from datasets import mapillary
 # from datasets import kitti
 # from datasets import camvid
@@ -64,13 +64,13 @@ def setup_loaders(args):
             args.val_batch_size = args.bs_mult_val * args.ngpu
         else:
             args.val_batch_size = args.bs_mult * args.ngpu
-    elif args.dataset == 'rtisrail22':
-        args.dataset_cls = rtisrail22
-        args.train_batch_size = args.bs_mult * args.ngpu
-        if args.bs_mult_val > 0:
-            args.val_batch_size = args.bs_mult_val * args.ngpu
-        else:
-            args.val_batch_size = args.bs_mult * args.ngpu
+    # elif args.dataset == 'rtisrail22':
+    #     args.dataset_cls = rtisrail22
+    #     args.train_batch_size = args.bs_mult * args.ngpu
+    #     if args.bs_mult_val > 0:
+    #         args.val_batch_size = args.bs_mult_val * args.ngpu
+    #     else:
+    #         args.val_batch_size = args.bs_mult * args.ngpu
     else:
         raise Exception('Dataset {} is not supported'.format(args.dataset))
 
@@ -280,23 +280,23 @@ def setup_loaders(args):
             transform=val_input_transform,
             target_transform=target_transform,
             test=False)
-    elif args.dataset == 'rtisrail22':
-        train_set = args.dataset_cls.RTISRail22(
-            'semantic', 'train',
-            joint_transform_list=train_joint_transform_list,
-            transform=train_input_transform,
-            target_transform=target_train_transform,
-            dump_images=args.dump_augmentation_images,
-            class_uniform_pct=args.class_uniform_pct,
-            class_uniform_tile=args.class_uniform_tile,
-            test=args.test_mode
-        )
-        val_set = args.dataset_cls.RTISRail22(
-            'semantic', 'val',
-            joint_transform_list=None,
-            transform=val_input_transform,
-            target_transform=target_transform,
-            test=False)
+    # elif args.dataset == 'rtisrail22':
+    #     train_set = args.dataset_cls.RTISRail22(
+    #         'semantic', 'train',
+    #         joint_transform_list=train_joint_transform_list,
+    #         transform=train_input_transform,
+    #         target_transform=target_train_transform,
+    #         dump_images=args.dump_augmentation_images,
+    #         class_uniform_pct=args.class_uniform_pct,
+    #         class_uniform_tile=args.class_uniform_tile,
+    #         test=args.test_mode
+    #     )
+    #     val_set = args.dataset_cls.RTISRail22(
+    #         'semantic', 'val',
+    #         joint_transform_list=None,
+    #         transform=val_input_transform,
+    #         target_transform=target_transform,
+    #         test=False)
         
 
     elif args.dataset == 'null_loader':
