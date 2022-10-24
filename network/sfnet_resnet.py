@@ -152,8 +152,10 @@ class AlignNetResNet(nn.Module):
 
         if trunk == 'resnet-18-deep':
             inplane_head = 512
-            self.head = UperNetAlignHead(inplane_head, num_class=num_classes, norm_layer=Norm2d,
-                                         fpn_inplanes=[64, 128, 256, 512], fpn_dim=128, fpn_dsn=fpn_dsn)
+            # self.head = UperNetAlignHead(inplane_head, num_class=num_classes, norm_layer=Norm2d,
+            #                              fpn_inplanes=[64, 128, 256, 512], fpn_dim=128, fpn_dsn=fpn_dsn)
+
+            self.head = UperNetAlignHead(inplane_head, num_class=num_classes, norm_layer=Norm2d)
         else:
             inplane_head = 2048
             self.head = UperNetAlignHead(inplane_head, num_class=num_classes, norm_layer=Norm2d, fpn_dsn=fpn_dsn)
