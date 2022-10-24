@@ -62,7 +62,8 @@ save_log('log', log_dir, date_str, rank=0)
 # get net
 args.dataset_cls = railsem19
 net = get_net(args, criterion=None)
-net = torch.nn.DataParallel(net, device_ids=[0,1,2,3]).cuda()
+# net = torch.nn.DataParallel(net, device_ids=[0,1,2,3]).cuda()
+net = net.wrap_network_in_dataparallel(net, args.apex)
 net = net.cuda()
 logging.info('Net built.')
 net, _ = restore_snapshot(net, optimizer=None, snapshot=args.snapshot, restore_optimizer_bool=False)
