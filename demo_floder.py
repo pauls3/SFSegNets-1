@@ -85,12 +85,12 @@ for img_id, img_name in enumerate(images):
     overlap_name = 'overlap_' + os.path.splitext(img_name)[0] + '.png'
 
     # save colorized predictions
-    colorized = args.dataset_cls.colorize_mask(pred)
+    # colorized = args.dataset_cls.colorize_mask(pred)
     # colorized = pred
     # if colorized.mode == "P":
     #     colorized = colorized.convert("RGB")
 
-    colorized.save(os.path.join(args.save_dir, color_name))
+    # colorized.save(os.path.join(args.save_dir, color_name))
     end_time_0 = time.time()
     new_time = new_time + end_time_0 - start_time_0
 
