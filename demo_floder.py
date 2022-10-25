@@ -40,7 +40,7 @@ save_log('log', log_dir, date_str, rank=0)
 # get net
 args.dataset_cls = railsem19
 net = get_net(args, criterion=None)
-net = torch.nn.DistributedDataParallel(net).cuda()
+net = torch.nn.DataParallel(net).cuda()
 net = net.cuda()
 logging.info('Net built.')
 net, _ = restore_snapshot(net, optimizer=None, snapshot=args.snapshot, restore_optimizer_bool=False)
@@ -61,12 +61,14 @@ img_transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize(
 if not os.path.exists(args.save_dir):
     os.makedirs(args.save_dir)
 
+new_time = 0
 start_time = time.time()
 for img_id, img_name in enumerate(images):
     img_dir = os.path.join(data_dir, img_name)
     img = Image.open(img_dir).convert('RGB')
     img_tensor = img_transform(img)
 
+    start_time_0 = time.time()
     # predict
     with torch.no_grad():
         pred = net(x=img_tensor.unsqueeze(0).cuda())
@@ -89,13 +91,16 @@ for img_id, img_name in enumerate(images):
     #     colorized = colorized.convert("RGB")
 
     colorized.save(os.path.join(args.save_dir, color_name))
+    end_time_0 = time.time()
+    new_time = new_time + end_time_0 - start_time_0
 
     # save colorized predictions overlapped on original images
-    overlap = cv2.addWeighted(np.array(img), 0.5, np.array(colorized.convert('RGB')), 0.5, 0)
-    cv2.imwrite(os.path.join(args.save_dir, overlap_name), overlap[:, :, ::-1])
+    # overlap = cv2.addWeighted(np.array(img), 0.5, np.array(colorized.convert('RGB')), 0.5, 0)
+    # cv2.imwrite(os.path.join(args.save_dir, overlap_name), overlap[:, :, ::-1])
 
 
 end_time = time.time()
 
 logging.info('Results saved.')
 logging.info('Inference takes %4.2f seconds, which is %4.2f seconds per image, including saving results.' % (end_time - start_time, (end_time - start_time)/len(images)))
+print(new_time / len(images))
