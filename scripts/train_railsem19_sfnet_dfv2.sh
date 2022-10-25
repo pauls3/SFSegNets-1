@@ -3,14 +3,14 @@ now=$(date +"%Y%m%d_%H%M%S")
 EXP_DIR=./sfnets/sfnet_dfv2_dsn
 mkdir -p ${EXP_DIR}
 # Example on Cityscapes by resnet50-deeplabv3+ as baseline
-python -m torch.distributed.launch --nproc_per_node=8 train.py \
+python -m torch.distributed.launch --nproc_per_node=4 train.py \
   --dataset cityscapes \
   --cv 0 \
-  --arch network.sfnet_dfnet.AlignedDFnetv1_FPNDSN \
+  --arch network.sfnet_dfnet.AlignedDFnetv2_FPNDSN \
   --class_uniform_pct 0.5 \
   --class_uniform_tile 1024 \
   --max_cu_epoch 300 \
-  --lr 0.01 \
+  --lr 0.003 \
   --lr_schedule poly \
   --poly_exp 1.0 \
   --repoly 1.5  \
