@@ -634,7 +634,7 @@ def main():
                 base_img, gt_with_imgs, img_names = data
                 base_img = base_img[0]
                 imgs = gt_with_imgs[0]
-                gt = gt_with_imgs[1]
+                # gt = gt_with_imgs[1]
             else:
                 base_img = None
                 imgs, gt, img_names = data
