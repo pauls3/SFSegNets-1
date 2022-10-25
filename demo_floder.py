@@ -75,8 +75,8 @@ for img_id, img_name in enumerate(images):
         logging.info('%04d/%04d: Inference done.' % (img_id + 1, len(images)))
 
     # final mask
-    pred = pred.cpu().numpy().squeeze()
-    pred = np.argmax(pred, axis=0)
+    # pred = pred.cpu().numpy().squeeze()
+    # pred = np.argmax(pred, axis=0)
 
     # final mask
     # color_name = 'color_mask_' + img_name
