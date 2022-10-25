@@ -16,6 +16,7 @@ from tqdm import tqdm
 import cv2
 from PIL import Image
 import PIL
+import time
 
 from torch.backends import cudnn
 from torch.utils.data import DataLoader
@@ -594,7 +595,8 @@ def main():
     logging.info("Inference mode: %s", args.inference_mode)
 
     # Set up network, loader, inference mode
-    metrics = args.dataset != 'video_folder'
+    # metrics = args.dataset != 'video_folder'
+    metrics = False
     if args.dataset == 'kitti' and args.split == 'test':
         metrics = False
     test_loader = setup_loader()
@@ -621,6 +623,7 @@ def main():
 
     # Run Inference!
     pbar = tqdm(test_loader, desc='eval {}'.format(args.split), smoothing=1.0)
+    start_time = time.time()
     for iteration, data in enumerate(pbar):
 
         if args.dataset == 'video_folder':
@@ -636,10 +639,14 @@ def main():
                 base_img = None
                 imgs, gt, img_names = data
 
+
         runner.inf(imgs, img_names, gt, inference, net, scales, pbar, base_img)
         if iteration > 5 and args.test_mode:
             break
 
+    end_time = time.time()
+    print('-------------------------------------')
+    print(end_time - start_time)
     # Calculate final overall statistics
     runner.final_dump()
 
