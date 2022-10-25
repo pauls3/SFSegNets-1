@@ -25,33 +25,11 @@ parser.add_argument('--demo_folder', type=str, default='', help='path to the fol
 parser.add_argument('--snapshot', type=str, default='./pretrained_models/cityscapes_best.pth', help='pre-trained checkpoint')
 parser.add_argument('--arch', type=str, default='network.sfnet_resnet.DeepR18_SF_deeply_dsn', help='network architecture used for inference')
 parser.add_argument('--save_dir', type=str, default='./save', help='path to save your results')
-parser.add_argument('--local_rank', default=0, type=int,
-                    help='parameter used by apex library')
-parser.add_argument('--apex', action='store_true', default=False,
-                    help='Use Nvidia Apex Distributed Data Parallel')
-
 
 args = parser.parse_args()
 assert_and_infer_cfg(args, train_mode=False)
 cudnn.benchmark = False
 torch.cuda.empty_cache()
-
-args.world_size = 1
-
-if 'WORLD_SIZE' in os.environ and args.apex:
-    args.apex = int(os.environ['WORLD_SIZE']) > 1
-    args.world_size = int(os.environ['WORLD_SIZE'])
-    print("Total world size: ", int(os.environ['WORLD_SIZE']))
-
-if args.apex:
-    # Check that we are running with cuda as distributed is only supported for cuda.
-    torch.cuda.set_device(args.local_rank)
-    print('My Rank:', args.local_rank)
-    # Initialize distributed communication
-    torch.distributed.init_process_group(backend='nccl',
-                                         init_method='env://')
-
-
 
 # setup logger
 date_str = str(datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S'))
@@ -62,8 +40,7 @@ save_log('log', log_dir, date_str, rank=0)
 # get net
 args.dataset_cls = railsem19
 net = get_net(args, criterion=None)
-# net = torch.nn.DataParallel(net, device_ids=[0,1,2,3]).cuda()
-net = net.wrap_network_in_dataparallel(net, args.apex)
+net = torch.nn.DistributedDataParallel(net).cuda()
 net = net.cuda()
 logging.info('Net built.')
 net, _ = restore_snapshot(net, optimizer=None, snapshot=args.snapshot, restore_optimizer_bool=False)
